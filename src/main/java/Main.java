@@ -19,7 +19,7 @@ public class Main {
 
         HttpClient webClient = HttpClient.newHttpClient();;
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/users"))
+                .uri(URI.create("http://localhost:8080/messages/100"))
                 .build();
         HttpResponse response = webClient.send(request, HttpResponse.BodyHandlers.ofString());
         int status = response.statusCode();

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Message;
@@ -38,7 +39,7 @@ public class MessageDAO {
         return null;
     }
 
-    public List<Message> getAllMessage()
+    public List<Message> getAllMessages()
     {
         Connection connection = ConnectionUtil.getConnection();
         List<Message> messages = new ArrayList<>();
@@ -58,6 +59,29 @@ public class MessageDAO {
         }
         
         return messages;
+    }
+
+    public Message getMessageById(int id)
+    {
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            //Write SQL logic here
+            String sql = "SELECT * FROM message WHERE message_id = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            //Prepared statement setStrings
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                Message message = new Message(rs.getInt("message_id"), rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
+                return message;
+            }        
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return null;
     }
     
 }
