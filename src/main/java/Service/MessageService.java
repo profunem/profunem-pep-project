@@ -19,7 +19,7 @@ public class MessageService {
         String messageText = message.getMessage_text();
         int postBy = message.getPosted_by();
 
-        if(messageText.isEmpty() || messageText.length() < 255 || accountDAO.getAccountById(postBy) == null)
+        if(messageText.isEmpty() || messageText.length() > 254 || accountDAO.getAccountById(postBy) == null)
         {
             return null;
         }
