@@ -144,7 +144,8 @@ public class SocialMediaController {
 
     private void getAllMessagesByAccountIDHandler(Context ctx) throws JsonProcessingException
     {
-
+        int id = Integer.valueOf(ctx.pathParam("account_id"));
+        ctx.json(messageService.getAllMessagesByAccountId(id));
     } 
 
     private void getAllAccountsHandler(Context ctx)
