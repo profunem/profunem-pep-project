@@ -118,7 +118,11 @@ public class SocialMediaController {
 
     private void deleteMessageByIDHandler(Context ctx) throws JsonProcessingException
     {
-
+        Message message = messageService.deleteMessageById(Integer.valueOf(ctx.pathParam("message_id")));
+        if(message != null)
+        {
+            ctx.json(message);
+        }   
     } 
 
     private void updateMessageByIDHandler(Context ctx) throws JsonProcessingException
